@@ -9,8 +9,7 @@ var firebaseConfig = {
     appId: "1:83276885199:web:c5279c656b168cdb1ddbba"
   };
   // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 export const auth = firebase.auth();
 export default firebase;
@@ -39,3 +38,20 @@ export const addFirebaseItem = async (item) => {
     console.log(err);
   }
 }
+
+export const updateFirebaseItem = async (item, id) => {
+  try {
+    const todoRef = db.collection("todos").doc(id);
+    await todoRef.update(item);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export const clearFirebaseItem = async (item) => {
+  const todoRef = db.collection("todos").doc(item.id);
+  await todoRef.delete().then(function () {
+  }).catch(function (err) {
+    console.log(err);
+  });
+};

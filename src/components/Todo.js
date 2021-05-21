@@ -18,7 +18,7 @@ import useFbStorage from '../hooks/fbStorage';
 import {getKey} from "../lib/util";
 
 function Todo() {
-  const [items, putItems, clearItems] = useFbStorage();
+  const [items, addItem, updateItem, clearItems] = useFbStorage();
 
   const [filter, setFilter] = useState('ALL');
   
@@ -31,14 +31,15 @@ function Todo() {
 
   
   const addTodo = (data) => {
-    putItems([...items, {key: getKey(), text: data, done: false}]);
+    addItem({'text': data, 'done': false});
   }
   
   const changeStatus = (data) => {
-     const newItems = items.map(item => {
-      return item.key === data.key ? {...item, done: !item.done} : item
-    })
-    putItems(newItems);
+    // const newItems = items.map(item => {
+    //   return item.key === data.key ? {...item, done: !item.done} : item
+    // })
+    // putItems(newItems);
+    updateItem(data);
   }
   
   const changeFilterHandler = (value) => {
