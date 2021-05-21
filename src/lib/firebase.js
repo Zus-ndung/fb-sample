@@ -79,7 +79,6 @@ export const storeUserInfo = async (user) => {
     };
   }
 }
-
 export const updateUser = async (user, image) => {
   try {
     const userDoc = await firebase.firestore().collection("users").doc(user.id).get();
@@ -93,12 +92,12 @@ export const updateUser = async (user, image) => {
 
 export const uploadImage = async (image) => {
   const ref = firebase.storage().ref().child(`/images/${image.name}`);
-  let downloadUrl = "";
+  let url = "";
   try {
     await ref.put(image);
-    downloadUrl = await ref.getDownloadURL();
+    url = await ref.getDownloadURL();
   } catch (err) {
     console.log(err);
   }
-  return downloadUrl;
+  return url;
 };
