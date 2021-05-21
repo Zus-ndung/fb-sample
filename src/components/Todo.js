@@ -12,15 +12,14 @@ import Input from './Input';
 import Filter from './Filter';
 
 /* カスタムフック */
-import useStorage from '../hooks/storage';
+import useFbStorage from '../hooks/fbStorage';
 
 /* ライブラリ */
 import {getKey} from "../lib/util";
 
 function Todo() {
-  const [items, putItems, clearItems] = useStorage();
+  const [items, putItems, clearItems] = useFbStorage();
 
-  
   const [filter, setFilter] = useState('ALL');
   
   const itemsFilter = items.filter(item => {
